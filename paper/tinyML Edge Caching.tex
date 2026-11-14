@@ -80,7 +80,7 @@ The main contributions of this paper are as follows.
 \item We define a benchmark protocol that isolates the contribution of each stage, selects the best model and platform for each stage, and builds two pipelines: an energy-neutral one, which may not use more energy than the baseline, and a hit-ratio-oriented one, which evaluates the prefetching stages behind the learned admission stage and reports the energy it costs.
 \item We derive a necessary and sufficient condition under which a tinyML stage reduces the energy of the system, together with the minimum request rate at which it does so (Proposition~\ref{prop:breakeven}).
 \item We evaluate the benchmark across four classes of microcontroller platforms, from Cortex-M cores without accelerators to devices with neural accelerators and parallel RISC-V clusters, on a synthetic trace and on a trace of real movie ratings, and we answer the research questions with the best model and platform for each stage and a design procedure (Sections~\ref{sec:results} to~\ref{sec:guidelines}).
-\item We release the simulator, the platform profiles, the trained models, the traces, and the experiment configurations at \tbd{repository link}, so that all results can be reproduced.
+\item We release the simulator, the platform profiles, the trained models, the traces, and the experiment configurations at \url{https://github.com/sshawky78AUA/tinyML-Edge-Caching}, so that all results can be reproduced.
 \end{itemize}
 
 The rest of the paper is organized as follows. Section~\ref{sec:related} reviews related work. Section~\ref{sec:system} presents the system model, and Section~\ref{sec:problem} formulates the problem and derives the energy break-even condition. Section~\ref{sec:platforms} describes the hardware platforms and how their profiles are obtained, and Section~\ref{sec:setup} describes the simulation setup. Sections~\ref{sec:results} and~\ref{sec:hw} present the results and the hardware analysis. Section~\ref{sec:guidelines} answers the research questions and derives design guidelines, Section~\ref{sec:threats} discusses threats to validity, and Section~\ref{sec:conclusion} concludes the paper.
@@ -1145,7 +1145,7 @@ The next steps are results on CDN traces with items of different sizes and the v
 
 \section*{Code and Data Availability}
 
-The simulator, the platform profiles, the trained models, the cycle model, the synthetic trace, the MovieTweetings window used here, and the scripts that produce every table and figure are available at \tbd{repository link}. The MovieTweetings dataset is available from its authors \cite{dooms2013}.
+The simulator, the platform profiles, the trained models, the cycle model, the synthetic trace, the MovieTweetings window used here, and the scripts that produce every table and figure are available at \url{https://github.com/sshawky78AUA/tinyML-Edge-Caching}. The MovieTweetings dataset is available from its authors \cite{dooms2013}.
 
 \begin{thebibliography}{99}
 \bibitem{sanchez2020}
