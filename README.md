@@ -2,7 +2,7 @@
 
 ## Folders
 
-- `paper/`: the LaTeX source (`tinyML Edge Caching.tex`), the PDF, the four figure files and `IEEEtran.cls`. To build it, run `pdflatex` twice inside this folder.
+- `paper/`: the LaTeX source (`tinyML Edge Caching.tex`), the PDF, the three figure files and `IEEEtran.cls`. To build it, run `pdflatex` twice inside this folder.
 - `sim/`: the MATLAB/GNU Octave simulator and experiment scripts, plus the Python scripts that make the tables and figures.
   - `run_sim.m`: the event-driven simulator (Section III).
   - `exp_platform2.m`: the benchmark protocol (Section VI-F). Use `exp_platform2(ip, seeds)` for the synthetic trace and `exp_mt(ip, seed)` for MovieTweetings.
