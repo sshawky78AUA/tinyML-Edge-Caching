@@ -1141,11 +1141,8 @@ This paper studied how much of the gain of a tinyML caching model survives on th
 
 Admission and eviction was the only stage that paid off on its own. Its learned model raised the hit ratio by about 1.8 points over ARC on a synthetic trace and by 1.1 to 1.3 points on a trace of real movie ratings, while saving energy. Next-request prefetching helped only behind this learned admission stage and only where the demand had regular successions: on the synthetic trace, the two stages together gained up to 3.7 points, about 19\%, at the cost of up to 32\% more backhaul traffic, whereas on the movie ratings prefetching did not help. The platform hardly changed the hit-ratio gain, but it set its energy cost. The energy of one inference differed by up to 577 times across the platforms, and admission and eviction saved energy above 4~nJ per backhaul byte on the platform with a neural accelerator, against 0.7~$\mu$J on the Cortex-M4. A microcontroller with a small neural accelerator is therefore the natural host for learned caching decisions, and the smallest platform can host only the smaller admission model on costly links.
 
-The next steps are results on CDN traces with items of different sizes and the validation of the cycle and energy models on hardware. Delivering a semantically similar cached item in place of a missing one, cooperation among several nodes, congested links, and on-device training are further extensions.
+The next steps are results on CDN traces with items of different sizes and the validation of the cycle and energy models on hardware. Delivering a semantically similar cached item in place of a missing one, cooperation among several nodes, congested links, and on-device training are further extensions. The code, models, and traces used in this paper are available at \url{https://github.com/sshawky78AUA/tinyML-Edge-Caching}.
 
-\section*{Code and Data Availability}
-
-The simulator, the platform profiles, the trained models, the cycle model, the synthetic trace, the MovieTweetings window used here, and the scripts that produce every table and figure are available at \url{https://github.com/sshawky78AUA/tinyML-Edge-Caching}. The MovieTweetings dataset is available from its authors \cite{dooms2013}.
 
 \begin{thebibliography}{99}
 \bibitem{sanchez2020}
@@ -1257,7 +1254,7 @@ Arm Ltd., \emph{Cortex-M3 Technical Reference Manual}, ARM DDI 0337G, 2008.
 Arm Ltd., \emph{Cortex-M4 Technical Reference Manual}, ARM DDI 0439B, 2010.
 
 \bibitem{arm_fastmodels}
-Arm Ltd., ``Fast Models reference guide: Model capabilities,'' Document 100964. [Online]. Available: \url{https://developer.arm.com/documentation/100964/1116/Introduction-to-the-Fast-Models-Reference-Manual/Model-capabilities}
+Arm Ltd., ``Fast Models reference guide: Model capabilities,'' Document 100964. [Online]. Available: \url{https://developer.arm.com/documentation/100964}
 
 \bibitem{alif_web}
 Alif Semiconductor, ``Ensemble E3 series.'' [Online]. Available: \url{https://alifsemi.com/ensemble-e3-series/}
