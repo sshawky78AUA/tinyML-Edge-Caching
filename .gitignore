@@ -1,0 +1,9 @@
+*.tflite
+*.log
+__pycache__/
+*.aux
+*.out
+*.bbl
+*.blg
+sim/data/
+sim/data_mt/

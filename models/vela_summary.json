@@ -1,0 +1,434 @@
+[
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s1_lin",
+  "cycles_total": 109,
+  "cycles_npu": 109,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 2,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s1_mlp_l",
+  "cycles_total": 1328,
+  "cycles_npu": 1328,
+  "sram_kib": 0.125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s1_mlp_s",
+  "cycles_total": 423,
+  "cycles_npu": 423,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s2_lin",
+  "cycles_total": 109,
+  "cycles_npu": 109,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 2,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s2_mlp_l",
+  "cycles_total": 1328,
+  "cycles_npu": 1328,
+  "sram_kib": 0.125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s2_mlp_s",
+  "cycles_total": 423,
+  "cycles_npu": 423,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s3_lin",
+  "cycles_total": 2727,
+  "cycles_npu": 2504,
+  "sram_kib": 2.53125,
+  "cpu_ops": 4,
+  "npu_ops": 3,
+  "cpu_op_types": [
+   "DEQUANTIZE",
+   "GATHER",
+   "LESS",
+   "PACK",
+   "SELECT_V2",
+   "SHAPE",
+   "STRIDED_SLICE"
+  ]
+ },
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s3_mlp_l",
+  "cycles_total": 5535,
+  "cycles_npu": 5535,
+  "sram_kib": 2.53125,
+  "cpu_ops": 4,
+  "npu_ops": 5,
+  "cpu_op_types": [
+   "DEQUANTIZE",
+   "GATHER",
+   "LESS",
+   "PACK",
+   "SELECT_V2",
+   "SHAPE",
+   "STRIDED_SLICE"
+  ]
+ },
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s3_mlp_s",
+  "cycles_total": 2967,
+  "cycles_npu": 2753,
+  "sram_kib": 2.53125,
+  "cpu_ops": 4,
+  "npu_ops": 5,
+  "cpu_op_types": [
+   "DEQUANTIZE",
+   "GATHER",
+   "LESS",
+   "PACK",
+   "SELECT_V2",
+   "SHAPE",
+   "STRIDED_SLICE"
+  ]
+ },
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s4_lin",
+  "cycles_total": 108,
+  "cycles_npu": 108,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 2,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s4_mlp_l",
+  "cycles_total": 1327,
+  "cycles_npu": 1327,
+  "sram_kib": 0.125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-64",
+  "net": "s4_mlp_s",
+  "cycles_total": 422,
+  "cycles_npu": 422,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s1_lin",
+  "cycles_total": 109,
+  "cycles_npu": 109,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 2,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s1_mlp_l",
+  "cycles_total": 1304,
+  "cycles_npu": 1304,
+  "sram_kib": 0.125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s1_mlp_s",
+  "cycles_total": 415,
+  "cycles_npu": 415,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s2_lin",
+  "cycles_total": 109,
+  "cycles_npu": 109,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 2,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s2_mlp_l",
+  "cycles_total": 1304,
+  "cycles_npu": 1304,
+  "sram_kib": 0.125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s2_mlp_s",
+  "cycles_total": 415,
+  "cycles_npu": 415,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s3_lin",
+  "cycles_total": 2691,
+  "cycles_npu": 2472,
+  "sram_kib": 2.53125,
+  "cpu_ops": 4,
+  "npu_ops": 3,
+  "cpu_op_types": [
+   "DEQUANTIZE",
+   "GATHER",
+   "LESS",
+   "PACK",
+   "SELECT_V2",
+   "SHAPE",
+   "STRIDED_SLICE"
+  ]
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s3_mlp_l",
+  "cycles_total": 5467,
+  "cycles_npu": 5467,
+  "sram_kib": 2.53125,
+  "cpu_ops": 4,
+  "npu_ops": 5,
+  "cpu_op_types": [
+   "DEQUANTIZE",
+   "GATHER",
+   "LESS",
+   "PACK",
+   "SELECT_V2",
+   "SHAPE",
+   "STRIDED_SLICE"
+  ]
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s3_mlp_s",
+  "cycles_total": 2911,
+  "cycles_npu": 2714,
+  "sram_kib": 2.53125,
+  "cpu_ops": 4,
+  "npu_ops": 5,
+  "cpu_op_types": [
+   "DEQUANTIZE",
+   "GATHER",
+   "LESS",
+   "PACK",
+   "SELECT_V2",
+   "SHAPE",
+   "STRIDED_SLICE"
+  ]
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s4_lin",
+  "cycles_total": 108,
+  "cycles_npu": 108,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 2,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s4_mlp_l",
+  "cycles_total": 1303,
+  "cycles_npu": 1303,
+  "sram_kib": 0.125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-128",
+  "net": "s4_mlp_s",
+  "cycles_total": 414,
+  "cycles_npu": 414,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s1_lin",
+  "cycles_total": 109,
+  "cycles_npu": 109,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 2,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s1_mlp_l",
+  "cycles_total": 1304,
+  "cycles_npu": 1304,
+  "sram_kib": 0.125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s1_mlp_s",
+  "cycles_total": 415,
+  "cycles_npu": 415,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s2_lin",
+  "cycles_total": 109,
+  "cycles_npu": 109,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 2,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s2_mlp_l",
+  "cycles_total": 1304,
+  "cycles_npu": 1304,
+  "sram_kib": 0.125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s2_mlp_s",
+  "cycles_total": 415,
+  "cycles_npu": 415,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s3_lin",
+  "cycles_total": 2688,
+  "cycles_npu": 2469,
+  "sram_kib": 2.53125,
+  "cpu_ops": 4,
+  "npu_ops": 3,
+  "cpu_op_types": [
+   "DEQUANTIZE",
+   "GATHER",
+   "LESS",
+   "PACK",
+   "SELECT_V2",
+   "SHAPE",
+   "STRIDED_SLICE"
+  ]
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s3_mlp_l",
+  "cycles_total": 5462,
+  "cycles_npu": 5462,
+  "sram_kib": 2.53125,
+  "cpu_ops": 4,
+  "npu_ops": 5,
+  "cpu_op_types": [
+   "DEQUANTIZE",
+   "GATHER",
+   "LESS",
+   "PACK",
+   "SELECT_V2",
+   "SHAPE",
+   "STRIDED_SLICE"
+  ]
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s3_mlp_s",
+  "cycles_total": 2908,
+  "cycles_npu": 2711,
+  "sram_kib": 2.53125,
+  "cpu_ops": 4,
+  "npu_ops": 5,
+  "cpu_op_types": [
+   "DEQUANTIZE",
+   "GATHER",
+   "LESS",
+   "PACK",
+   "SELECT_V2",
+   "SHAPE",
+   "STRIDED_SLICE"
+  ]
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s4_lin",
+  "cycles_total": 108,
+  "cycles_npu": 108,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 2,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s4_mlp_l",
+  "cycles_total": 1303,
+  "cycles_npu": 1303,
+  "sram_kib": 0.125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ },
+ {
+  "cfg": "ethos-u55-256",
+  "net": "s4_mlp_s",
+  "cycles_total": 414,
+  "cycles_npu": 414,
+  "sram_kib": 0.03125,
+  "cpu_ops": 0,
+  "npu_ops": 6,
+  "cpu_op_types": []
+ }
+]

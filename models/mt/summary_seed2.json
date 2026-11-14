@@ -1,0 +1,83 @@
+[
+ {
+  "key": "s1_lin",
+  "seed": 2,
+  "metric": 0.8406120538711548,
+  "macs": 7,
+  "params": 8,
+  "tflite_bytes": 1464,
+  "int8_agree": 1.0
+ },
+ {
+  "key": "s1_mlp_s",
+  "seed": 2,
+  "metric": 0.8412681221961975,
+  "macs": 384,
+  "params": 417,
+  "tflite_bytes": 3840,
+  "int8_agree": 1.0
+ },
+ {
+  "key": "s1_mlp_l",
+  "seed": 2,
+  "metric": 0.8411754965782166,
+  "macs": 4608,
+  "params": 4737,
+  "tflite_bytes": 10752,
+  "int8_agree": 1.0
+ },
+ {
+  "key": "s2_lin",
+  "seed": 2,
+  "metric": 0.9193227887153625,
+  "macs": 6,
+  "params": 7,
+  "tflite_bytes": 1488,
+  "int8_agree": 0.995
+ },
+ {
+  "key": "s2_mlp_s",
+  "seed": 2,
+  "metric": 0.9293026924133301,
+  "macs": 368,
+  "params": 401,
+  "tflite_bytes": 3824,
+  "int8_agree": 0.984
+ },
+ {
+  "key": "s2_mlp_l",
+  "seed": 2,
+  "metric": 0.929416298866272,
+  "macs": 4544,
+  "params": 4673,
+  "tflite_bytes": 10704,
+  "int8_agree": 0.983
+ },
+ {
+  "key": "s3_lin",
+  "seed": 2,
+  "metric": 0.7633724212646484,
+  "macs": 6,
+  "params": 7,
+  "tflite_bytes": 1488,
+  "int8_agree": 1.0
+ },
+ {
+  "key": "s3_mlp_s",
+  "seed": 2,
+  "metric": 0.797333836555481,
+  "macs": 368,
+  "params": 401,
+  "tflite_bytes": 3840,
+  "int8_agree": 1.0
+ },
+ {
+  "key": "s3_mlp_l",
+  "seed": 2,
+  "metric": 0.7983018159866333,
+  "macs": 4544,
+  "params": 4673,
+  "tflite_bytes": 10704,
+  "int8_agree": 1.0
+ }
+]
