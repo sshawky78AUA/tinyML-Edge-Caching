@@ -6,5 +6,8 @@ authors:
     given-names: Sameh
     affiliation: "American University of Armenia"
     orcid: "https://orcid.org/0000-0002-1672-7250"
+  - family-names: Tadrous
+    given-names: John
+    affiliation: "Gonzaga University"
 license: MIT
 repository-code: "https://github.com/sshawky78AUA/tinyML-Edge-Caching"
