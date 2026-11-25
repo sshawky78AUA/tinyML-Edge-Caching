@@ -7,9 +7,9 @@ function exp_platform2(ip, seeds, tag)
 %     gain; the prefetching stages are measured behind it (reference pi^A)
 %     and the pipeline is searched without the energy constraint.
 if nargin < 3, tag = ''; end
-P = params_default(); tf = 'trace_s1p.mat'; bf = 'results_b2.mat'; stages = 1:4;
-if strcmp(tag, 'mt'), tf = 'trace_mt.mat'; bf = 'results_b2_mt.mat'; P.modeldir = '../models_mt/'; stages = 1:3; P.theta3 = 0.10; end   % theta3 by F1 on the MT validation part
-load(tf);
+P = params_default(); tf = '../data/trace_s1p.mat'; bf = 'results/results_b2.mat'; stages = 1:4;
+if strcmp(tag, 'mt'), tf = '../data/trace_mt.mat'; bf = 'results/results_b2_mt.mat'; P.modeldir = '../models/mt/'; stages = 1:3; P.theta3 = 0.10; end   % theta3 by F1 on the MT validation part
+S_ = load(tf); tr = S_.tr;
 segV = [tr.Ttr - 4*3600, tr.Ttr, tr.Tva]; segT = [tr.Tva - 4*3600, tr.Tva, tr.Tend];
 kt = find(tr.t >= tr.Tva); C = P.Cfrac*sum(tr.s(unique(tr.f(kt)))); smean = mean(tr.s(tr.f));
 S = load(bf); b2 = S.b2;
@@ -35,14 +35,15 @@ for seed = seeds
       dH = Rv.H - O.base_va.H; G = O.base_va.Esys - Rv.Esys;
       if dH > bestgain && G >= 0, bestgain = dH; best{j} = m; end
       if j == 2 && dH > bestH2 && Rv.rho < 1, bestH2 = dH; m2H = m; end
-      printf('C%d s%d %s dHva=%.4f Gva=%.2f Nh=%d\n', ip, seed, m, dH, G, Nh); fflush(stdout);
+      fprintf('C%d s%d %s dHva=%.4f Gva=%.2f Nh=%d\n', ip, seed, m, dH, G, Nh);
     end
     % the test part evaluates the selected models only (S2: both selections)
-    for m = unique([best(j), {m2H}(j == 2)])
+    s2sel = {m2H}; if j ~= 2, s2sel = {}; end
+    for m = unique([best(j), s2sel])
       if strcmp(m{1}, 'b'), continue; end
       impl = base; impl{j} = m{1};
       O.single.(m{1}).te = run(impl, segT, O.single.(m{1}).Nh, 0);
-      printf('C%d s%d %s dHte=%.4f\n', ip, seed, m{1}, O.single.(m{1}).te.H - O.base_te.H); fflush(stdout);
+      fprintf('C%d s%d %s dHte=%.4f\n', ip, seed, m{1}, O.single.(m{1}).te.H - O.base_te.H);
     end
   end
   O.best = best;
@@ -74,7 +75,7 @@ for seed = seeds
       Rv = run(impl, segV, Nh, 0); O.behind.(m).va = Rv;
       dH = Rv.H - O.A_va.H;
       if dH > bg && Rv.rho < 1, bg = dH; bestA{j} = m; end
-      printf('C%d s%d behind %s dHva=%.4f\n', ip, seed, m, dH); fflush(stdout);
+      fprintf('C%d s%d behind %s dHva=%.4f\n', ip, seed, m, dH);
     end
     if ~strcmp(bestA{j}, 'b')                       % test run of the selected model only
       m = bestA{j}; impl = A; impl{j} = m;
@@ -84,9 +85,9 @@ for seed = seeds
   O.bestA = bestA;
   [O.combH, O.combH_va] = search(bestA, A, O.A_va, false);   % S2 kept at m2H
   O.combH_Nh = nh_for(O.combH, pf, P, C, smean); O.combH_te = run(O.combH, segT, O.combH_Nh, 0);
-  printf('C%d s%d comb0 %s dHte=%.4f | combH %s dHte=%.4f dEsys=%.1f\n', ip, seed, strjoin(O.comb, ','), ...
-    O.comb_te.H - O.base_te.H, strjoin(O.combH, ','), O.combH_te.H - O.base_te.H, O.combH_te.Esys - O.base_te.Esys); fflush(stdout);
-  save('-v7', sprintf('res2%s_C%d_seed%d.mat', tag, ip, seed), 'O');
+  fprintf('C%d s%d comb0 %s dHte=%.4f | combH %s dHte=%.4f dEsys=%.1f\n', ip, seed, strjoin(O.comb, ','), ...
+    O.comb_te.H - O.base_te.H, strjoin(O.combH, ','), O.combH_te.H - O.base_te.H, O.combH_te.Esys - O.base_te.Esys);
+  save(sprintf('results/res2%s_C%d_seed%d.mat', tag, ip, seed), 'O', '-v7');
 end
 
   function [bestc, bestR] = search(cand, ref, Rref, energy)

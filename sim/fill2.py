@@ -1,12 +1,14 @@
 """LaTeX tables and figures for the revised paper from results2<tag>.json,
-analysis2<tag>.json, rate2_C*.mat and cache2_C*.mat. Tables are written
-between %<TAB:name> and %</TAB:name> markers of the paper."""
+analysis2<tag>.json and rate2_C*.mat in results/. Run from sim/ after
+aggregate2.m and analyze2.py. The tables of stage gains, the loss split and
+the combined pipelines are written between the %<TAB:name> and %</TAB:name>
+markers of ../paper/tinyML Edge Caching.tex, and Figs. 2 to 4 to ../paper/."""
 import json, re, sys, collections, numpy as np, matplotlib
 matplotlib.use('Agg'); import matplotlib.pyplot as plt
 from scipy.io import loadmat
 from scipy import stats
-PAPER = '/home/claude/tinyML Edge Caching.tex'
-A = json.load(open('results2.json')); R = json.load(open('analysis2.json'))
+PAPER = '../paper/tinyML Edge Caching.tex'   # tables are written into this file; figures go to ../paper/
+A = json.load(open('results/results2.json')); R = json.load(open('results/analysis2.json'))
 CL = ['C1', 'C2', 'C3', 'C4']; LAB = ['Class 1', 'Class 2', 'Class 3', 'Class 4']
 COL = ['#0072B2', '#E69F00', '#009E73', '#CC79A7']
 plt.rcParams.update({'font.size': 8, 'font.family': 'serif', 'axes.linewidth': 0.6, 'pdf.fonttype': 42, 'legend.fontsize': 7})
@@ -79,30 +81,14 @@ open(PAPER, 'w').write(s)
 # ---- figures ----
 W = 3.4
 # energy per inference (S1, S2, S4; S3 uses the S2 architectures)
-O = json.load(open('results_summary.json'))
 NM = ['s1_lin','s1_mlp_s','s1_mlp_l','s2_lin','s2_mlp_s','s2_mlp_l','s4_lin','s4_mlp_s','s4_mlp_l']
 fig, ax = plt.subplots(figsize=(W, 2.0)); x = np.arange(len(NM)); bw = 0.2
 for i, c in enumerate(CL):
-    ax.bar(x + (i - 1.5)*bw, [O[c]['inf'][n]['E']*1e6 for n in NM], bw, color=COL[i], label=LAB[i])
+    ax.bar(x + (i - 1.5)*bw, [A[c]['inf'][n]['E']*1e6 for n in NM], bw, color=COL[i], label=LAB[i])
 ax.set_yscale('log'); ax.set_ylabel(r'Energy per inference ($\mu$J)'); ax.set_xticks(x)
 ax.set_xticklabels([n[:2].upper() + ' ' + SH(n) for n in NM], rotation=55, ha='right', fontsize=6.5)
 ax.legend(ncol=4, loc='lower center', frameon=False, fontsize=6.5, bbox_to_anchor=(0.5, 1.0), columnspacing=0.8, handlelength=1.2)
-ax.grid(axis='y', lw=0.3, alpha=0.5); fig.tight_layout(pad=0.3); fig.savefig('fig_energy_inf.pdf')
-# single-stage validation gain vs added node energy per request
-fig, ax = plt.subplots(figsize=(W, 2.1)); mk = {'s1': 'o', 's2': 's', 's3': '^', 's4': 'D'}
-for i, c in enumerate(CL):
-    ss = seeds(c)
-    for n in ['s%d_%s' % (j, m) for j in range(1, 5) for m in ('lin', 'mlp_s', 'mlp_l')]:
-        v = [s['single'][n] for s in ss if n in s['single'] and s['single'][n].get('feas')]
-        if not v: continue
-        dH = np.mean([x['dHva'] for x in v]); dE = np.mean([x['dEENva']/x['Kva'] for x in v])*1e6
-        ax.scatter(max(dE, 1e-3), 100*dH, s=14, marker=mk[n[:2]], color=COL[i], edgecolors='none', alpha=0.85)
-ax.set_xscale('log'); ax.set_xlabel(r'Added node energy per request ($\mu$J)'); ax.set_ylabel(r'$\Delta H_j$ on $\mathcal{R}_\mathrm{va}$ (points)')
-ax.axhline(0, color='k', lw=0.5)
-from matplotlib.lines import Line2D
-h = [Line2D([], [], ls='', marker='s', color=COL[i], label=LAB[i]) for i in range(4)] + [Line2D([], [], ls='', marker=mk[k], color='gray', label=k.upper()) for k in mk]
-ax.legend(handles=h, ncol=4, frameon=False, fontsize=6.5, loc='lower left', bbox_to_anchor=(0, 1.0)); ax.grid(lw=0.3, alpha=0.5)
-fig.tight_layout(pad=0.3); fig.savefig('fig_pareto.pdf')
+ax.grid(axis='y', lw=0.3, alpha=0.5); fig.tight_layout(pad=0.3); fig.savefig('../paper/fig_energy_inf.pdf')
 # windowed hit ratio, Class 3, mean over seeds with 95% bands; full 1-h windows only
 ss = seeds('C3'); nw = 14; tc = np.arange(nw) + 0.5
 def band(key):
@@ -122,11 +108,11 @@ ax.set_xlim(0, nw); ax.set_ylim(0.15, 0.285)
 ax.set_xlabel('Time in the test part (h)'); ax.set_ylabel(r'$H_\ell$')
 ax.legend(frameon=False, ncol=3, loc='lower center', bbox_to_anchor=(0.5, 1.0), fontsize=6.3, handlelength=1.5, columnspacing=0.8)
 ax.grid(lw=0.3, alpha=0.5)
-fig.tight_layout(pad=0.3); fig.savefig('fig_window.pdf')
+fig.tight_layout(pad=0.3); fig.savefig('../paper/fig_window.pdf')
 # break-even backhaul energy of the selected S2 model vs rate
 fig, ax = plt.subplots(figsize=(W, 2.0)); be = {}
 for i, c in enumerate(CL):
-    o = loadmat(f'rate2_{c}.mat', squeeze_me=True, struct_as_record=False)['out']
+    o = loadmat(f'results/rate2_{c}.mat', squeeze_me=True, struct_as_record=False)['out']
     lam, eb = [], []
     for rr in np.atleast_1d(o.runs):
         b, m = rr[0], rr[2]
@@ -136,6 +122,6 @@ for i, c in enumerate(CL):
 ax.axhline(1e3, color='k', ls='--', lw=0.6); ax.text(0.04, 1.2e3, r'nominal $e_\mathrm{b}$', fontsize=6.5)
 ax.set_xscale('log'); ax.set_yscale('log'); ax.set_xlabel(r'Request rate $\lambda$ (requests/s)'); ax.set_ylabel(r'Break-even $e_\mathrm{b}$ (nJ/byte)')
 ax.legend(frameon=False, fontsize=6.3, loc='lower right', ncol=2); ax.grid(lw=0.3, alpha=0.5, which='both'); ax.set_ylim(0.1, 5e3)
-fig.tight_layout(pad=0.3); fig.savefig('fig_breakeven.pdf')
-json.dump(be, open('breakeven2.json', 'w'), indent=1, default=float)
+fig.tight_layout(pad=0.3); fig.savefig('../paper/fig_breakeven.pdf')
+json.dump(be, open('results/breakeven2.json', 'w'), indent=1, default=float)
 print('tables and figures written')

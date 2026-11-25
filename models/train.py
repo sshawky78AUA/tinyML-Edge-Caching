@@ -1,11 +1,14 @@
 """Train, quantize (int8 PTQ) and export the candidate models of every stage.
 
-Inputs : ../sim/data/{tr,va}_s{1..4}.csv  (features..., label), written by
-         export_training.m from the synthetic trace.
+Inputs : $DATA/{tr,va}_s{1..4}.csv  (features..., label), written by
+         sim/export_all.m; DATA defaults to ../data/train_syn.
+         STAGES selects the stages to train (default 1234; MovieTweetings: 123).
 Outputs: tflite/<stage>_<model>.tflite   full-integer int8 models
          weights/<stage>_<model>.mat     float weights + normalization for MATLAB
          summary.csv                     validation metric, MACs, sizes, int8/float agreement
-Usage  : python3 train.py <seed>
+Usage  : cd models && python3 train.py <seed>
+         cd models/mt && DATA=../../data/train_mt STAGES=123 python3 ../train.py <seed>
+         Outputs go to the current folder.
 """
 import sys, os, json
 import numpy as np, tensorflow as tf
@@ -13,7 +16,7 @@ from scipy.io import savemat
 
 seed = int(sys.argv[1]) if len(sys.argv) > 1 else 1
 tf.keras.utils.set_random_seed(seed)
-D = os.environ.get('DATA', os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'sim', 'data'))
+D = os.environ.get('DATA', os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'train_syn'))
 os.makedirs('tflite', exist_ok=True); os.makedirs('weights', exist_ok=True)
 FE, Q3 = 512, 3
 

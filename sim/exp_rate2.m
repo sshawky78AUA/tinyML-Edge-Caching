@@ -3,11 +3,11 @@ function exp_rate2(ip, gammas, seed)
 % by gamma (warm-up scaled by 1/gamma) and the baseline, the S2 MLP-S model,
 % the selected S2 model, and the hit-ratio-oriented pipeline of the seed are
 % evaluated on the test part.
-P = params_default(); load('trace_s1p.mat'); tr0 = tr;
-S = load('results_b2.mat'); b2 = S.b2;
+P = params_default(); S_ = load('../data/trace_s1p.mat'); tr = S_.tr; tr0 = tr;
+S = load('results/results_b2.mat'); b2 = S.b2;
 kt = find(tr0.t >= tr0.Tva); C = P.Cfrac*sum(tr0.s(unique(tr0.f(kt)))); smean = mean(tr0.s(tr0.f));
 [WM, pfs] = load_all(P, seed); pf = pfs{ip};
-Q = load(sprintf('res2_C%d_seed%d.mat', ip, seed)); O = Q.O;
+Q = load(sprintf('results/res2_C%d_seed%d.mat', ip, seed)); O = Q.O;
 base = {'b','b','b','b'}; s2m = base; s2m{2} = 's2_mlp_s'; s2b = base; s2b{2} = O.best{2};
 cfgs = {base, s2m, s2b, O.combH}; labels = {'base', 's2_mlp_s', 's2_best', 'combH'};
 out = struct('gamma', gammas, 'labels', {labels}, 'cfgs', {cfgs}, 'runs', {{}});
@@ -23,9 +23,9 @@ for g = gammas
     R = run_sim(tr, P2, struct('impl', {impl}, 's2base', b2, 'C', C), pf, WM, seg, Nh, struct());
     rr{a} = struct('H', R.H, 'HB', R.HB, 'Esys', R.Esys, 'EEN', R.EEN, 'Elink', R.Elink, 'rho', R.rho, ...
                    'drop', R.drop, 'nd', R.nd, 'D', R.D, 'lambda', R.lambda, 'Spf', R.Spf, 'bytesB', R.bytesB);
-    printf('C%d g=%g %s H=%.4f rho=%.3g drop=%s\n', ip, g, labels{a}, R.H, R.rho, mat2str(R.drop)); fflush(stdout);
+    fprintf('C%d g=%g %s H=%.4f rho=%.3g drop=%s\n', ip, g, labels{a}, R.H, R.rho, mat2str(R.drop));
   end
   out.runs{end+1} = rr;
 end
-save('-v7', sprintf('rate2_C%d.mat', ip), 'out');
+save(sprintf('results/rate2_C%d.mat', ip), 'out', '-v7');
 end

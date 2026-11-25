@@ -2,7 +2,7 @@
 import json, sys, numpy as np
 from scipy import stats
 tag = sys.argv[1] if len(sys.argv) > 1 else ''
-A = json.load(open(f'results2{tag}.json'))
+A = json.load(open(f'results/results2{tag}.json'))
 CL = ['C1', 'C2', 'C3', 'C4']
 PR = lambda n: 'Baseline' if n == 'b' else n.split('_', 1)[0].upper() + ' ' + {'lin': 'linear', 'mlp_s': 'MLP-S', 'mlp_l': 'MLP-L'}[n.split('_', 1)[1]]
 def ci(v):
@@ -14,6 +14,7 @@ def S(c):
 out = {}
 for c in CL:
     ss = S(c); n = len(ss); r = {'n': n}
+    if n == 0: continue          # class not run on this trace (MovieTweetings: Classes 1 and 3)
     r['baseH'] = ci([s['base']['H'] for s in ss])[0]; r['baseD'] = ci([s['base']['D'] for s in ss])[0]
     r['baseEsys'] = ci([s['base']['Esys'] for s in ss])[0]; r['baseEEN'] = ci([s['base']['EEN'] for s in ss])[0]
     # single stages (validation for all, test for selected)
@@ -49,8 +50,8 @@ for c in CL:
         if v: r['behind'][k] = dict(dHva=ci([x['dHva'] for x in v]), dHte=ci([x.get('dHte', np.nan) for x in v]), nte=sum('dHte' in x for x in v))
     r['bestA'] = [','.join(s['bestA']) for s in ss]
     out[c] = r
-json.dump(out, open(f'analysis2{tag}.json', 'w'), indent=1, default=float)
-for c in CL:
+json.dump(out, open(f'results/analysis2{tag}.json', 'w'), indent=1, default=float)
+for c in out:
     r = out[c]; print(f"== {c} n={r['n']} baseH={r['baseH']:.4f}")
     for j in '1234':
         print(f"  S{j} sel {r['sel'+j]}  test dH {r['selgain'+j][0]} G {r['selgain'+j][1]}")

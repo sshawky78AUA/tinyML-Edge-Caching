@@ -1,0 +1,7 @@
+# Python packages for training (models/), the tables and the figures (sim/*.py).
+# Versions used for the paper; newer versions should work.
+numpy>=2.0
+scipy>=1.13
+matplotlib>=3.8
+scikit-learn>=1.4      # equivalence2.py only
+tensorflow>=2.16       # models/train.py and models/equivalence2.py only

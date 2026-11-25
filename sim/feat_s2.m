@@ -5,7 +5,7 @@ function X = feat_s2(tr, P, items, lastIdx, kmin, t, cntH)
 % latest request of item f that has arrived; requests older than kmin are
 % outside the history and are treated as missing.
 items = items(:); n = numel(items); big = log1p(1e5);
-ts = 1; if isfield(P, "tscale"), ts = P.tscale; end
+ts = 1; if isfield(P, 'tscale'), ts = P.tscale; end
 G = big*ones(n, P.nd);
 k = lastIdx(items); tprev = t*ones(n,1); v = k >= kmin & k > 0;
 for d = 1:P.nd

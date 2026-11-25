@@ -11,7 +11,7 @@ if isempty(nz), cand = []; X = zeros(0, 6); cnt = []; return; end
 [cs, o] = sort(row(nz), 'descend'); n = min(P.Nc3, numel(nz));
 cand = nz(o(1:n)); cand = cand(:); cnt = cs(1:n); cnt = cnt(:); nf = sum(row);
 li = lastIdx(cand); rec = log1p(1e5)*ones(n,1); ok = li >= kmin & li > 0;
-ts = 1; if isfield(P, "tscale"), ts = P.tscale; end
+ts = 1; if isfield(P, 'tscale'), ts = P.tscale; end
 rec(ok) = log1p((t - tr.t(li(ok)))*ts);
 X = [log1p(cnt), log1p(nf)*ones(n,1), cnt/nf, log1p(cntH(cand)), log(tr.s(cand)), rec];
 end

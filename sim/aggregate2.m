@@ -1,13 +1,18 @@
 function aggregate2(tag, seeds)
 % AGGREGATE2  Collect res2<tag>_C*_seed*.mat into results2<tag>.json.
-P = params_default(); if strcmp(tag, 'mt'), P.modeldir = '../models_mt/'; end
+P = params_default(); if strcmp(tag, 'mt'), P.modeldir = '../models/mt/'; end
 names = {'s1_lin','s1_mlp_s','s1_mlp_l','s2_lin','s2_mlp_s','s2_mlp_l', ...
   's3_lin','s3_mlp_s','s3_mlp_l','s4_lin','s4_mlp_s','s4_mlp_l'};
-A = struct();
+A = struct(); [~, pfs, mdl] = load_all(P, 1);
 for ip = 1:4
-  c = struct(); c.seeds = {};
+  c = struct(); c.seeds = {}; pf = pfs{ip}; c.name = pf.name;
+  for a = 1:numel(names)                       % latency and energy of one inference (Fig. 2)
+    n = names{a}; cy = pf.cost.(n);
+    c.inf.(n) = struct('cpu', cy(1), 'npu', cy(2), 'tau', cy(1)/pf.phi + cy(2)/pf.phin, ...
+      'E', pf.ecpu*cy(1) + pf.enpu*cy(2), 'macs', mdl.(n).macs, 'bytes', mdl.(n).bytes);
+  end
   for s = seeds
-    fn = sprintf('res2%s_C%d_seed%d.mat', tag, ip, s);
+    fn = sprintf('results/res2%s_C%d_seed%d.mat', tag, ip, s);
     if ~exist(fn, 'file'), continue; end
     Q = load(fn); O = Q.O; b = O.base_te; r = struct();
     r.seed = s; r.Nh0 = O.Nh0; r.base = pick(b); r.best = O.best; r.comb = O.comb; r.combH = O.combH;
@@ -34,7 +39,7 @@ for ip = 1:4
   end
   A.(sprintf('C%d', ip)) = c;
 end
-fid = fopen(sprintf('results2%s.json', tag), 'w'); fprintf(fid, '%s', jsonencode(A)); fclose(fid);
+fid = fopen(sprintf('results/results2%s.json', tag), 'w'); fprintf(fid, '%s', jsonencode(A)); fclose(fid);
 end
 function e = diffs(e, t, b)
 e.H = t.H; e.HB = t.HB; e.dH = t.H - b.H; e.dHB = t.HB - b.HB; e.G = b.Esys - t.Esys;

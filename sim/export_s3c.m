@@ -3,7 +3,7 @@ function export_s3c(outprefix, t0, t1, tracefile)
 % user makes a later request, one row per candidate of feat_s3 (features,
 % then label = 1 if the candidate is the user's next item). The history has
 % length P.Nh_inf and is preloaded with the requests before t0.
-P = params_default(); if nargin < 4, tracefile = 'trace_s1p.mat'; end; load(tracefile); F = tr.F; Nh = P.Nh_inf;
+P = params_default(); if nargin < 4, tracefile = '../data/trace_s1p.mat'; end; S_ = load(tracefile); tr = S_.tr; F = tr.F; Nh = P.Nh_inf;
 lastIdx = zeros(F,1); cntH = zeros(F,1); T = zeros(F, F, 'int16');
 kpre = find(tr.t < t0);
 if ~isempty(kpre)
@@ -30,5 +30,5 @@ for k = ks(:)'
 end
 csvwrite(sprintf('%s_s3.csv', outprefix), D(1:n, 1:7));
 csvwrite(sprintf('%s_s3_req.csv', outprefix), D(1:n, 8));
-printf('%s: %d rows, %d requests, positives %.3f\n', outprefix, n, numel(unique(D(1:n,8))), mean(D(1:n,7)));
+fprintf('%s: %d rows, %d requests, positives %.3f\n', outprefix, n, numel(unique(D(1:n,8))), mean(D(1:n,7)));
 end
